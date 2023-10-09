@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] GameObject obstaclePref;
+    [SerializeField] GameObject metalObstaclePref;
+    [SerializeField] GameObject stoneObstaclePref;
+    [SerializeField] GameObject woodObstaclePref;
 
     [Header("Obstacle spawn info")]
     [SerializeField] float obstacleSpawnDuration;
@@ -28,14 +30,24 @@ public class GameManager : MonoBehaviour
 
         if (obstacleSpawnTimer < 0)
         {
-            SpawnObstacle();
+            SpawnRandomObstacle();
             obstacleSpawnTimer = obstacleSpawnDuration;
         }
     }
 
-    void SpawnObstacle()
+    void SpawnRandomObstacle()
     {
+        GameObject obstacleToSpawn;
+        float randomRange = Random.Range(1, 101);
+
+        if (randomRange <= 33)
+            obstacleToSpawn = metalObstaclePref;
+        else if (randomRange >= 66)
+            obstacleToSpawn = stoneObstaclePref;
+        else
+            obstacleToSpawn = woodObstaclePref;
+
         Vector3 spawnPos = new Vector3(obstacleSpawnX, Random.Range(-obstacleSpawnYRange, obstacleSpawnYRange));
-        Instantiate(obstaclePref, spawnPos, Quaternion.identity);
+        Instantiate(obstacleToSpawn, spawnPos, Quaternion.identity);
     }
 }

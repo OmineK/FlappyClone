@@ -2263,7 +2263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7368070a4ea7c6846af3b5ac612c498d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePref: {fileID: 9014602069480348521, guid: c30121412d34e234b8300788dc2149bf, type: 3}
+  metalObstaclePref: {fileID: 9014602069480348521, guid: c30121412d34e234b8300788dc2149bf, type: 3}
+  stoneObstaclePref: {fileID: 9014602069480348521, guid: f09e4f721b92337498a708b08090c486, type: 3}
+  woodObstaclePref: {fileID: 9014602069480348521, guid: cc561699291628e4fb2a18e7ade66e1a, type: 3}
   obstacleSpawnDuration: 2
   obstacleSpawnX: 11
   obstacleSpawnYRange: 2.2

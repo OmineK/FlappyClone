@@ -9,7 +9,5 @@ public class Obstacle : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.left * obstacleMoveSpeed * Time.deltaTime; 
-    }
-
-    
+    }  
 }
