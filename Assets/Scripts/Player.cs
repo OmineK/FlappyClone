@@ -4,39 +4,64 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float playerSwimmingUpVelocity;
+    [SerializeField] float playerFlyingUpVelocity;
     [SerializeField] float playerRotationSpeed;
-    [SerializeField] float swimmingUpDuration;
+    [SerializeField] float flyingUpDuration;
 
-    float swimmingUpTimer;
-    bool swimmingUp = false;
+    float flyingUpTimer;
+    bool flyingUp = false;
 
     Rigidbody2D rb;
+    Animator anim;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
     {
-        if (swimmingUp)
-            rb.velocity = Vector3.up * playerSwimmingUpVelocity;
-
-        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * playerRotationSpeed);
+        PlayerMovement();
     }
 
     void Update()
     {
-        swimmingUpTimer -= Time.deltaTime;
+        VelocityTimer();
+        PlayerAnimation();
+        PlayerInputs();
+    }
 
-        if (swimmingUp && (swimmingUpTimer < 0))
-            swimmingUp = false;
+    void PlayerMovement()
+    {
+        if (flyingUp)
+            rb.velocity = Vector3.up * playerFlyingUpVelocity;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !swimmingUp)
+        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * playerRotationSpeed);
+    }
+
+    void VelocityTimer()
+    {
+        flyingUpTimer -= Time.deltaTime;
+
+        if (flyingUp && (flyingUpTimer < 0))
+            flyingUp = false;
+    }
+
+    void PlayerAnimation()
+    {
+        if (transform.rotation.z < 0)
+            anim.speed = 0;
+        else
+            anim.speed = 1;
+    }
+
+    void PlayerInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !flyingUp)
         {
-            swimmingUp = true;
-            swimmingUpTimer = swimmingUpDuration;
+            flyingUp = true;
+            flyingUpTimer = flyingUpDuration;
         }
     }
 }
