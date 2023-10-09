@@ -46,11 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd13f63c9ebd76b4388c00a14cd40a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePref: {fileID: 9014602069480348521}
   obstacleMoveSpeed: 4
-  obstacleSpawnDuration: 2
-  obstacleSpawnX: 11
-  obstacleSpawnYRange: 2.2
 --- !u!1 &9014602069554859582
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +120,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -235,7 +231,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

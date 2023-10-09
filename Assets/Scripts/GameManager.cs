@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField] GameObject obstaclePref;
 
     [Header("Obstacle spawn info")]
@@ -11,6 +13,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] float obstacleSpawnX;
     [SerializeField] float obstacleSpawnYRange;
     float obstacleSpawnTimer;
+
+    void Awake()
+    {
+        if (instance != null)
+            Destroy(instance.gameObject);
+        else
+            instance = this;
+    }
 
     void Update()
     {
