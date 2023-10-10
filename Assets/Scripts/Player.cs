@@ -80,4 +80,9 @@ public class Player : MonoBehaviour
             flyingUpTimer = flyingUpDuration;
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameManager.instance.GameOver();
+    }
 }
