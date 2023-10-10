@@ -17,6 +17,12 @@ public class UI : MonoBehaviour
             instance = this;
     }
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void UpdateScoreUI(int _score)
     {
         scoreText.text = _score.ToString();
