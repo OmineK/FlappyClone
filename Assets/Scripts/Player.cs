@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -64,21 +65,29 @@ public class Player : MonoBehaviour
 
     void PlayerInputs()
     {
-        if (GameManager.instance.isPlaying == false && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            if (GameManager.instance.isGameStart == false)
+            {
+                rb.bodyType = RigidbodyType2D.Dynamic;
 
-            GameManager.instance.isPlaying = true;
-            UI.instance.GameStartUI(!GameManager.instance.isPlaying);
+                GameManager.instance.isGameStart = true;
+                UI.instance.GameStartUI(!GameManager.instance.isGameStart);
 
-            return;
-        }
+                return;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !flyingUp &&
-        GameManager.instance.gamePause == false)
-        {
-            flyingUp = true;
-            flyingUpTimer = flyingUpDuration;
+            if (GameManager.instance.isGameOver)
+            {
+                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(currentSceneIndex);
+            }
+
+            if (!flyingUp && GameManager.instance.isGamePause == false)
+            {
+                flyingUp = true;
+                flyingUpTimer = flyingUpDuration;
+            }
         }
     }
 

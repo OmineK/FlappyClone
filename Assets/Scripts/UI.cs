@@ -35,12 +35,6 @@ public class UI : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
-    public void PlayAgainButton()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-
     public void GoToMenuButton()
     {
         SceneManager.LoadScene("Menu");

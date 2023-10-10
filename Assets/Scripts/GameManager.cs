@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     [Header("Game score info")]
     int currentScore;
 
-    [NonSerialized] public bool gamePause;
-    [NonSerialized] public bool isPlaying;
+    [NonSerialized] public bool isGamePause;
+    [NonSerialized] public bool isGameStart;
+    [NonSerialized] public bool isGameOver;
 
     void Awake()
     {
@@ -39,23 +40,23 @@ public class GameManager : MonoBehaviour
         UI.instance.UpdateScoreUI(currentScore);
         UI.instance.UpdateInGameBestScoreTextUI(PlayerPrefs.GetInt("bestScore"));
 
-        isPlaying = false;
-        UI.instance.GameStartUI(!isPlaying);
+        isGameStart = false;
+        UI.instance.GameStartUI(!isGameStart);
     }
 
     void Update()
     {
         GamePauseInput();
 
-        if (isPlaying)
+        if (isGameStart)
             ObstacleSpawnTimer();
     }
 
     void GamePauseInput()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !gamePause)
+        if (Input.GetKeyDown(KeyCode.P) && !isGamePause)
             GamePause(true);
-        else if (gamePause && Input.GetKeyDown(KeyCode.Space))
+        else if (isGamePause && Input.GetKeyDown(KeyCode.Space))
             GamePause(false);
     }
 
@@ -72,9 +73,9 @@ public class GameManager : MonoBehaviour
 
     void GamePause(bool _pause)
     {
-        gamePause = _pause;
+        isGamePause = _pause;
 
-        if (gamePause)
+        if (isGamePause)
         {
             Time.timeScale = 0;
             UI.instance.GamePauseUI(_pause);
@@ -111,6 +112,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        isGameOver = true;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
