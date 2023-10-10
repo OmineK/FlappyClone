@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Game score info")]
     int currentScore;
-    int bestScore;
 
     [NonSerialized] public bool gamePause;
     [NonSerialized] public bool isPlaying;
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         UI.instance.UpdateScoreUI(currentScore);
+        UI.instance.UpdateInGameBestScoreTextUI(PlayerPrefs.GetInt("bestScore"));
 
         isPlaying = false;
         UI.instance.GameStartUI(!isPlaying);
@@ -114,10 +114,10 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (currentScore > bestScore)
-            bestScore = currentScore;
+        if (currentScore > PlayerPrefs.GetInt("bestScore"))
+            PlayerPrefs.SetInt("bestScore", currentScore);
 
-        UI.instance.GameOverUI(currentScore, bestScore);
+        UI.instance.GameOverUI(currentScore, PlayerPrefs.GetInt("bestScore"));
 
         Time.timeScale = 0;
     }

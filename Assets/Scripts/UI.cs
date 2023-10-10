@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
 
     [Header("InGame TextMesh info")]
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] TextMeshProUGUI gameOverCurrentScoreText;
     [SerializeField] TextMeshProUGUI gameOverBestScoreText;
 
@@ -50,6 +51,8 @@ public class UI : MonoBehaviour
     public void GamePauseUI(bool _pause) => gamePauseUI.SetActive(_pause);
 
     public void GameStartUI(bool _gameStart) => gameStartUI.SetActive(_gameStart);
+
+    public void UpdateInGameBestScoreTextUI(int _score) => bestScoreText.text = "Best score: " + _score;
 
     public void GameOverUI(int _currentScore, int _bestScore)
     {
