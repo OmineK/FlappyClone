@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+    void Start()
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+    }
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -58,7 +63,18 @@ public class Player : MonoBehaviour
 
     void PlayerInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !flyingUp)
+        if (GameManager.instance.isPlaying == false && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+
+            GameManager.instance.isPlaying = true;
+            UI.instance.GameStartUI(!GameManager.instance.isPlaying);
+
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !flyingUp &&
+        GameManager.instance.gamePause == false)
         {
             flyingUp = true;
             flyingUpTimer = flyingUpDuration;

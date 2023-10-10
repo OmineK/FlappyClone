@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [Header("Game score info")]
     int currentScore;
 
+    [NonSerialized] public bool gamePause;
+    [NonSerialized] public bool isPlaying;
+
     void Awake()
     {
         if (instance != null)
@@ -32,9 +35,28 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UI.instance.UpdateScoreUI(currentScore);
+
+        isPlaying = false;
+        UI.instance.GameStartUI(!isPlaying);
     }
 
     void Update()
+    {
+        GamePauseInput();
+
+        if (isPlaying)
+            ObstacleSpawnTimer();
+    }
+
+    void GamePauseInput()
+    {
+        if (Input.GetKeyDown(KeyCode.P) && !gamePause)
+            GamePause(true);
+        else if (gamePause && Input.GetKeyDown(KeyCode.Space))
+            GamePause(false);
+    }
+
+    void ObstacleSpawnTimer()
     {
         obstacleSpawnTimer -= Time.deltaTime;
 
@@ -43,6 +65,23 @@ public class GameManager : MonoBehaviour
             SpawnRandomObstacle();
             obstacleSpawnTimer = obstacleSpawnDuration;
         }
+    }
+
+    void GamePause(bool _pause)
+    {
+        gamePause = _pause;
+
+        if (gamePause)
+        {
+            Time.timeScale = 0;
+            UI.instance.GamePauseUI(_pause);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            UI.instance.GamePauseUI(_pause);
+        }
+
     }
 
     void SpawnRandomObstacle()
