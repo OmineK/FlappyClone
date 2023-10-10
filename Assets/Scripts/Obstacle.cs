@@ -9,5 +9,10 @@ public class Obstacle : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.left * obstacleMoveSpeed * Time.deltaTime; 
-    }  
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameManager.instance.UpdateScore();
+    }
 }
