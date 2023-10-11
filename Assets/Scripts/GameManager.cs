@@ -112,6 +112,12 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (isGameOver == false)
+        {
+            AudioManager.instance.PlaySFX(6);
+            Invoke(nameof(GameOverRandomSFX), 0.2f);
+        }
+
         isGameOver = true;
 
         Cursor.lockState = CursorLockMode.None;
@@ -121,7 +127,17 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("bestScore", currentScore);
 
         UI.instance.GameOverUI(currentScore, PlayerPrefs.GetInt("bestScore"));
+    }
 
-        Time.timeScale = 0;
+    void GameOverRandomSFX()
+    {
+        int randomSFX = UnityEngine.Random.Range(0,3);
+
+        if (randomSFX == 0)
+            AudioManager.instance.PlaySFX(3);
+        else if (randomSFX == 1)
+            AudioManager.instance.PlaySFX(4);
+        else if (randomSFX == 2)
+            AudioManager.instance.PlaySFX(5);
     }
 }

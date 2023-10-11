@@ -85,10 +85,23 @@ public class Player : MonoBehaviour
 
             if (!flyingUp && GameManager.instance.isGamePause == false)
             {
+                PlayRandomBirdSFX();
                 flyingUp = true;
                 flyingUpTimer = flyingUpDuration;
             }
         }
+    }
+
+    void PlayRandomBirdSFX()
+    {
+        int randomSFX = UnityEngine.Random.Range(0, 3);
+
+        if (randomSFX == 0)
+            AudioManager.instance.PlaySFX(0);
+        else if (randomSFX == 1)
+            AudioManager.instance.PlaySFX(1);
+        else if (randomSFX == 2)
+            AudioManager.instance.PlaySFX(2);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
