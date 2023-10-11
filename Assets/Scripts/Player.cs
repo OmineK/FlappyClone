@@ -6,20 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement info")]
     [SerializeField] float playerFlyingUpVelocity;
     [SerializeField] float playerRotationSpeed;
     [SerializeField] float flyingUpDuration;
+
+    [Header("Death particles")]
+    [SerializeField] GameObject deathParticlesPref;
 
     float flyingUpTimer;
     bool flyingUp = false;
 
     Rigidbody2D rb;
     Animator anim;
+    PolygonCollider2D birdCollider;
+    SpriteRenderer sr;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        birdCollider = GetComponent<PolygonCollider2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Start()
@@ -106,6 +114,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        birdCollider.enabled = false;
+        Instantiate(deathParticlesPref, transform.position, Quaternion.identity);
+        sr.enabled = false;
+
         GameManager.instance.GameOver();
     }
 }

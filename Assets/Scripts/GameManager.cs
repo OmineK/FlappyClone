@@ -35,8 +35,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1;
-
         UI.instance.UpdateScoreUI(currentScore);
         UI.instance.UpdateInGameBestScoreTextUI(PlayerPrefs.GetInt("bestScore"));
 

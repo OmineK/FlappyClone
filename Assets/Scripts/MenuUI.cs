@@ -7,8 +7,6 @@ public class MenuUI : MonoBehaviour
 {
     void Start()
     {
-        Time.timeScale = 1;
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

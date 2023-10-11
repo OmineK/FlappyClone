@@ -216,3 +216,4 @@ MonoBehaviour:
   playerFlyingUpVelocity: 3
   playerRotationSpeed: 4
   flyingUpDuration: 0.6
+  deathParticlesPref: {fileID: 8890009781846465985, guid: 4dbe1dc0ba959034cbe1c39584e135e1, type: 3}
